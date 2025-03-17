@@ -24,13 +24,13 @@ class LoginScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    authBloc.login();
+                    authBloc.login(context);
                   },
                   child: Text('Login with Username'),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    authBloc.loginWithGoogle();
+                    authBloc.loginWithGoogle(context);
                   },
                   child: Text('Login with Google'),
                 ),

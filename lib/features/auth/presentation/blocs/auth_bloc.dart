@@ -9,27 +9,37 @@ class AuthBloc with ChangeNotifier {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  // Login with username and password
-  void login() async {
-    bool success = await loginUseCase.execute(
-      usernameController.text,
-      passwordController.text,
-    );
+   void login(BuildContext context) async {
+    try {
+      bool success = await loginUseCase.execute(
+        usernameController.text,
+        passwordController.text,
+      );
 
-    if (success) {
-      // Handle success (Navigate, show success message)
-    } else {
-      // Handle failure
+      if (success) {
+        // Handle success (Navigate, show success message)
+      } else {
+        // Handle failure (Show error message)
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Invalid Credentials")));
+      }
+    } catch (e) {
+      // Handle any exceptions
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("An error occurred: $e")));
     }
   }
 
-  // Login with Google
-  void loginWithGoogle() async {
-    bool success = await loginUseCase.executeWithGoogle();
-    if (success) {
-      // Handle Google sign-in success
-    } else {
-      // Handle failure
+  void loginWithGoogle(BuildContext context) async {
+    try {
+      bool success = await loginUseCase.executeWithGoogle();
+      if (success) {
+        // Handle Google sign-in success
+      } else {
+        // Handle failure
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Google Sign-In failed")));
+      }
+    } catch (e) {
+      // Handle any exceptions
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("An error occurred: $e")));
     }
   }
 }
