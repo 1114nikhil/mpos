@@ -31,41 +31,25 @@ class DefaultFirebaseOptions {
     }
   }
 
-  // static const FirebaseOptions web = FirebaseOptions(
-  //   apiKey: "",
-  // authDomain: "",
-  // projectId: "",
-  // storageBucket: "",
-  // messagingSenderId: "",
-  // appId: "",
-  // measurementId: ""
-  // );
-
-  // static const FirebaseOptions android = FirebaseOptions(
-  //   apiKey: '',
-  //   appId: '',
-  //   messagingSenderId: '',
-  //   projectId: '',
-  //   storageBucket: '',
-  // );
-
   static const FirebaseOptions web = FirebaseOptions(
-apiKey: "AIzaSyBbKgSMl8b8A0tH3e1Q8FskfAgRuLIbyj0",
-authDomain: "mpos-2cf39.firebaseapp.com",
-projectId: "mpos-2cf39",
-storageBucket: "mpos-2cf39.firebasestorage.app",
-messagingSenderId: "780979485335",
-appId: "1:780979485335:web:e7064b07da350ce84107d2",
-measurementId: "G-KPFLJHCR03"
-);
+    apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
+  );
 
-static const FirebaseOptions android = FirebaseOptions(
-apiKey: 'AIzaSyBbKgSMl8b8A0tH3e1Q8FskfAgRuLIbyj0',
-appId: '1:780979485335:android:7ebb8552d9355a0d4107d2',
-messagingSenderId: '780979485335',
-projectId: 'mpos-2cf39',
-storageBucket: 'YOUR_STORAGE_BUCKET',
-);
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: '',
+    appId: '',
+    messagingSenderId: '',
+    projectId: '',
+    storageBucket: '',
+  );
+
+
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'YOUR_IOS_API_KEY',
