@@ -42,4 +42,7 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+     <uses-permission android:name="android.permission.INTERNET"/>
+     <uses-sdk android:minSdkVersion="23" />
+    <uses-sdk tools:overrideLibrary="io.flutter.plugins.firebase.auth" />
 </manifest>

@@ -1,13 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:mpos/features/auth/data/datasources/db_helper.dart';
+import 'package:mpos/core/datasources/db_helper.dart';
 
 class AuthRepository {
   final DBHelper dbHelper = DBHelper();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  // final GoogleSignIn _googleSignIn = GoogleSignIn(
+  //   clientId: "", // Ensure this is set for web
+  // );
   final GoogleSignIn _googleSignIn = GoogleSignIn(
-    clientId: "", // Ensure this is set for web
-  );
+clientId: "780979485335-r9mn3mlq429safokckka7q7ujsjvdntb.apps.googleusercontent.com", // Ensure this is set for web
+);
 
   // Login with username and password (SQLite)
   Future<bool> loginWithCredentials(String username, String password) async {
