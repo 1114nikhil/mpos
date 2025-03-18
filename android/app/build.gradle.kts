@@ -8,7 +8,8 @@ plugins {
 android {
     namespace = "com.example.mpos"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.0.12077973"
+    ndkVersion =  "27.0.12077973"
+
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -38,7 +39,9 @@ android {
         }
     }
 }
-
+dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.20") // Update to match your Kotlin version
+}
 flutter {
     source = "../.."
 }
