@@ -1,15 +1,20 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mpos/features/auth/data/datasources/firebase_options.dart';
+import 'package:mpos/core/datasources/firebase_options.dart';
 import 'package:mpos/features/auth/data/repositories/auth_repository.dart';
 import 'package:mpos/features/auth/domain/usecases/login_usecase.dart';
 import 'package:mpos/features/auth/presentation/blocs/auth_bloc.dart';
 import 'package:mpos/features/auth/presentation/screens/login_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';// Add this import
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    sqfliteFfiInit(); // Initialize FFI bindings
+    databaseFactory = databaseFactoryFfi; // Set factory for desktop
+  }
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
