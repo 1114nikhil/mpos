@@ -8,7 +8,7 @@ import 'package:mpos/core/widgets/ult_outlined_button.dart';
 class LoginForm extends StatelessWidget {
   final AuthBloc authBloc;
 
-  const LoginForm({required this.authBloc});
+  const LoginForm({super.key, required this.authBloc});
 
   @override
   Widget build(BuildContext context) {
