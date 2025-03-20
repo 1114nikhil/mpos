@@ -5,7 +5,7 @@ class ULTTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
 
-  const ULTTextField({
+  const ULTTextField({super.key, 
     required this.controller,
     required this.hintText,
     this.obscureText = false,

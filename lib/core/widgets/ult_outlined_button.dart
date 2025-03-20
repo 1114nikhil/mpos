@@ -6,7 +6,7 @@ class ULTOutlinedButton extends StatelessWidget {
   final String text;
   final String? iconPath; // Optional icon path for buttons with icons
 
-  const ULTOutlinedButton({
+  const ULTOutlinedButton({super.key, 
     required this.onPressed,
     required this.text,
     this.iconPath,
