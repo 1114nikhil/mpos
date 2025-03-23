@@ -1,14 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mpos/core/datasources/db_helper.dart';
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, TargetPlatform;
 
 class AuthRepository {
   final DBHelper dbHelper = DBHelper();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn(
-    clientId: "", // Ensure this is set for web
-  );
- 
+  late final GoogleSignIn _googleSignIn;
+
+  AuthRepository() {
+    // Use web client ID for macOS and web, default for mobile
+    print(defaultTargetPlatform);
+   
+    if ( defaultTargetPlatform == TargetPlatform.macOS) {
+      _googleSignIn = GoogleSignIn(
+        clientId: '', // Replace with your web client ID
+      );
+    } else {
+      _googleSignIn = GoogleSignIn(); // Default for Android/iOS
+    }
+  }
 
   // Login with username and password (SQLite)
   Future<bool> loginWithCredentials(String username, String password) async {

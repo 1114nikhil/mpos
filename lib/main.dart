@@ -12,20 +12,15 @@ import 'package:provider/provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-  //   sqfliteFfiInit(); // Initialize FFI bindings
-  //   databaseFactory = databaseFactoryFfi; // Set factory for desktop
-  // }
-  if(kIsWeb){await Firebase.initializeApp(
-    options: const FirebaseOptions(
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
-)
-  );}
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    sqfliteFfiInit(); // Initialize FFI bindings
+    databaseFactory = databaseFactoryFfi; // Set factory for desktop
+  }
+
+     
+await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform, );
+
+  
   runApp(MyApp());
 }
 
