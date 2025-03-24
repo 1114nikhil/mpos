@@ -18,7 +18,11 @@ void main() async {
   }
 
      
-await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform, );
+if(Platform.isMacOS||Platform.isWindows||kIsWeb||Platform.isIOS){
+  await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform, );}
+  else{
+     await Firebase.initializeApp();
+  }
 
   
   runApp(MyApp());
