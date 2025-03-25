@@ -20,6 +20,8 @@ class DefaultFirebaseOptions {
     switch (defaultTargetPlatform) {
       case TargetPlatform.macOS:
         return macos;
+      case TargetPlatform.windows:
+        return window;
       case TargetPlatform.iOS:
         return ios;
       default:
@@ -30,7 +32,16 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: "",
+   apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: ""
+  );
+  static const FirebaseOptions window = FirebaseOptions(
+  apiKey: "",
   authDomain: "",
   projectId: "",
   storageBucket: "",
