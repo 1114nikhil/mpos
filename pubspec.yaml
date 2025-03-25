@@ -36,14 +36,13 @@ dependencies:
   sqflite_common_ffi: ^2.3.5
   path_provider: ^2.1.5
   provider: ^6.1.2
-  flutterfire_cli: ^1.1.0
-  firebase_core_web: ^2.21.1
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  google_sign_in_web: ^0.12.4+4
+  google_fonts: ^6.2.1
   cupertino_icons: ^1.0.8
   google_sign_in: ^6.3.0
-  google_fonts: ^6.2.1
+  url_launcher: ^6.3.0  # For launching the OAuth URL
+  shelf: ^1.4.1         # For creating a local server
+  http: ^1.2.2          # For making HTTP requests
 
 dev_dependencies:
   flutter_test:
