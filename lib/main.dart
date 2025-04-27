@@ -8,7 +8,6 @@ import 'package:mpos/core/routes/app_router.dart';
 import 'package:mpos/features/auth/data/repositories/auth_repository.dart';
 import 'package:mpos/features/auth/domain/usecases/login_usecase.dart';
 import 'package:mpos/features/auth/presentation/blocs/auth_bloc.dart';
-import 'package:mpos/features/auth/presentation/screens/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 void main() async {
@@ -19,12 +18,11 @@ void main() async {
   }
 
      
-if(Platform.isMacOS||Platform.isWindows||kIsWeb||Platform.isIOS){
-  await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform, );}
-  else{
-     await Firebase.initializeApp();
-  }
-
+await Firebase.initializeApp(
+  options: kIsWeb || Platform.isWindows || Platform.isMacOS
+      ? DefaultFirebaseOptions.currentPlatform
+      : null, // <- For Android/iOS, use native plist/json config
+);
   
   runApp(MyApp());
 }

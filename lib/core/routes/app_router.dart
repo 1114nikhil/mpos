@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mpos/features/auth/presentation/screens/login_screen.dart';
-import 'package:mpos/features/dashboard/dashboard.dart';
+import 'package:mpos/features/dashboard/presentation/screen/dashboard.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings setting){
