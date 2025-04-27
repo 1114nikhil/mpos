@@ -18,6 +18,7 @@ class AuthBloc with ChangeNotifier {
 
       if (success) {
         // Handle success (Navigate, show success message)
+          Navigator.pushReplacementNamed(context, '/dashboard');
       } else {
         // Handle failure (Show error message)
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Invalid Credentials")));
@@ -33,6 +34,7 @@ class AuthBloc with ChangeNotifier {
       bool success = await loginUseCase.executeWithGoogle();
       if (success) {
         // Handle Google sign-in success
+        Navigator.pushReplacementNamed(context, '/dashboard');
       } else {
         // Handle failure
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Google Sign-In failed")));

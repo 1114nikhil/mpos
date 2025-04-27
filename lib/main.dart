@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mpos/core/datasources/firebase_options.dart';
+import 'package:mpos/core/routes/app_router.dart';
 import 'package:mpos/features/auth/data/repositories/auth_repository.dart';
 import 'package:mpos/features/auth/domain/usecases/login_usecase.dart';
 import 'package:mpos/features/auth/presentation/blocs/auth_bloc.dart';
@@ -41,7 +42,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Flutter Login',
-        home: LoginScreen(),
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: AppRouter.generateRoute,//for routing screen
+        initialRoute: '/',
       ),
     );
   }

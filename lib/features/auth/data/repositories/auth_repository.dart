@@ -95,6 +95,7 @@ class AuthRepository {
   Future<bool> loginWithCredentials(String username, String password) async {
     try {
       var user = await dbHelper.getUser(username, password);
+      print('loginWithCredentials ${username} ,${password}');
       if (user != null) return true;
       throw Exception('Invalid username or password');
     } catch (e) {
