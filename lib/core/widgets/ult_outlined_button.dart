@@ -4,12 +4,17 @@ import 'package:google_fonts/google_fonts.dart';
 class ULTOutlinedButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
-  final String? iconPath; // Optional icon path for buttons with icons
+  final String? iconPath;
+  final double fontSizeMultiplier;
+  final double padding;
 
-  const ULTOutlinedButton({super.key, 
+  const ULTOutlinedButton({
+    super.key,
     required this.onPressed,
     required this.text,
     this.iconPath,
+    this.fontSizeMultiplier = 1.0,
+    this.padding = 16.0,
   });
 
   @override
@@ -17,8 +22,9 @@ class ULTOutlinedButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
-        minimumSize: Size(double.infinity, 50),
-        side: BorderSide(color: Color(0xFF00C4B4)), // Sky Blue
+        minimumSize: Size(double.infinity, 50 * fontSizeMultiplier),
+        side: const BorderSide(color: Color(0xFF00C4B4)), // Sky Blue
+        padding: EdgeInsets.symmetric(horizontal: padding, vertical: padding / 2),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -29,15 +35,15 @@ class ULTOutlinedButton extends StatelessWidget {
           if (iconPath != null) ...[
             Image.asset(
               iconPath!,
-              height: 20,
+              height: 20 * fontSizeMultiplier,
             ),
-            SizedBox(width: 8),
+            SizedBox(width: padding / 2),
           ],
           Text(
             text,
             style: GoogleFonts.poppins(
-              fontSize: 14,
-              color: Color(0xFF00C4B4), // Sky Blue
+              fontSize: 14 * fontSizeMultiplier,
+              color: const Color(0xFF00C4B4), // Sky Blue
               fontWeight: FontWeight.w500,
             ),
           ),

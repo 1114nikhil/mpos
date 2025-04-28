@@ -5,7 +5,8 @@ class UltCard extends StatelessWidget {
   final String value;
   final IconData icon;
   final Color color;
-  final bool isTablet;
+  final double fontSizeMultiplier;
+  final double padding;
 
   const UltCard({
     super.key,
@@ -13,7 +14,8 @@ class UltCard extends StatelessWidget {
     required this.value,
     required this.icon,
     required this.color,
-    required this.isTablet,
+    this.fontSizeMultiplier = 1.0,
+    this.padding = 16.0,
   });
 
   @override
@@ -24,25 +26,29 @@ class UltCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(padding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: isTablet ? 36 : 32, color: color),
-            const SizedBox(height: 8),
+            Icon(
+              icon,
+              size: 32 * fontSizeMultiplier,
+              color: color,
+            ),
+            SizedBox(height: padding / 2),
             Text(
               value,
               style: TextStyle(
-                fontSize: isTablet ? 22 : 20,
+                fontSize: 20 * fontSizeMultiplier,
                 fontWeight: FontWeight.bold,
                 color: color,
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: padding / 4),
             Text(
               title,
               style: TextStyle(
-                fontSize: isTablet ? 16 : 14,
+                fontSize: 14 * fontSizeMultiplier,
                 color: Colors.grey[600],
               ),
             ),
