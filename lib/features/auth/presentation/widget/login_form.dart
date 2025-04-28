@@ -7,8 +7,15 @@ import 'package:mpos/core/widgets/ult_outlined_button.dart';
 
 class LoginForm extends StatelessWidget {
   final AuthBloc authBloc;
+  final double fontSizeMultiplier;
+  final double padding;
 
-  const LoginForm({super.key, required this.authBloc});
+  const LoginForm({
+    super.key,
+    required this.authBloc,
+    this.fontSizeMultiplier = 1.0,
+    this.padding = 16.0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,47 +26,54 @@ class LoginForm extends StatelessWidget {
         Text(
           "Sign In",
           style: GoogleFonts.poppins(
-            fontSize: 28,
+            fontSize: 28 * fontSizeMultiplier,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF00C4B4), // Sky Blue
+            color: const Color(0xFF00C4B4), // Sky Blue
           ),
         ),
-        SizedBox(height: 8),
+        SizedBox(height: padding / 2),
         Text(
           "Welcome back to your account",
           style: GoogleFonts.poppins(
-            fontSize: 14,
+            fontSize: 14 * fontSizeMultiplier,
             color: Colors.grey[600],
           ),
         ),
-        SizedBox(height: 32),
+        SizedBox(height: padding * 2),
         ULTTextField(
           controller: authBloc.usernameController,
           hintText: 'Username',
+          fontSizeMultiplier: fontSizeMultiplier,
         ),
-        SizedBox(height: 16),
+        SizedBox(height: padding),
         ULTTextField(
           controller: authBloc.passwordController,
           hintText: 'Password',
           obscureText: true,
+          fontSizeMultiplier: fontSizeMultiplier,
         ),
-        SizedBox(height: 24),
+        SizedBox(height: padding * 1.5),
         ULTElevatedButton(
           onPressed: () => authBloc.login(context),
           text: 'Login',
+          fontSizeMultiplier: fontSizeMultiplier,
         ),
-        SizedBox(height: 16),
+        SizedBox(height: padding),
         Center(
           child: Text(
             'or',
-            style: TextStyle(color: Colors.grey[500]),
+            style: TextStyle(
+              fontSize: 14 * fontSizeMultiplier,
+              color: Colors.grey[500],
+            ),
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: padding),
         ULTOutlinedButton(
           onPressed: () => authBloc.loginWithGoogle(context),
           text: 'Continue with Google',
           iconPath: 'assets/images/google_logo.png',
+          fontSizeMultiplier: fontSizeMultiplier,
         ),
       ],
     );
