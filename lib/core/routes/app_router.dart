@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mpos/features/auth/presentation/screens/login_screen.dart';
+import 'package:mpos/features/auth/presentation/screens/signup_screen.dart';
 import 'package:mpos/features/dashboard/presentation/screen/dashboard.dart';
 
 class AppRouter {
@@ -7,6 +8,8 @@ class AppRouter {
     switch (setting.name){
       case "/":
         return MaterialPageRoute(builder: (_)=>const LoginScreen());
+      case "/signup":
+        return MaterialPageRoute(builder: (_)=>const SignUpScreen());
       case "/dashboard":
         return MaterialPageRoute(builder: (_)=>const DashboardScreen());
       default:

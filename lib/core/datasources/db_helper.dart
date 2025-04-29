@@ -25,7 +25,7 @@ class DBHelper {
           'CREATE TABLE users(id INTEGER PRIMARY KEY, username TEXT, password TEXT)',
         );
         // Insert a test user
-        await db.insert('users', {'username': 'test', 'password': 'pass'});
+        // await db.insert('users', {'username': 'test', 'password': 'pass'});
         print("Inserted test user: test/pass");
       },
       onOpen: (db) async {
@@ -52,6 +52,19 @@ class DBHelper {
       whereArgs: [username, password],
     );
     print("Query result for $username/$password: $result");
+    if (result.isNotEmpty) {
+      return result.first;
+    }
+    return null;
+  }
+   Future<Map<String, dynamic>?> getUserByUsername(String username) async {
+    final db = await database;
+    final List<Map<String, dynamic>> result = await db.query(
+      'users',
+      where: 'username = ?',
+      whereArgs: [username],
+    );
+    print("Query result for username $username: $result");
     if (result.isNotEmpty) {
       return result.first;
     }

@@ -104,6 +104,21 @@ class AuthRepository {
     }
   }
 
+  Future<bool> signUpWithCredentials(String username, String password) async {
+    try {
+      // Check if username already exists
+      final existingUser = await dbHelper.getUserByUsername(username);
+      if (existingUser != null) {
+        throw Exception('Username already exists');
+      }
+      await dbHelper.insertUser(username, password);
+      return true;
+    } catch (e) {
+      print("SQLite SignUp Error: $e");
+      throw Exception('Database error: $e');
+    }
+  }
+
   // Login with Google
   Future<User?> loginWithGoogle() async {
     try {

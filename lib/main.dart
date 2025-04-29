@@ -5,10 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mpos/core/datasources/firebase_options.dart';
 import 'package:mpos/core/routes/app_router.dart';
-import 'package:mpos/features/auth/data/repositories/auth_repository.dart';
-import 'package:mpos/features/auth/domain/usecases/login_usecase.dart';
-import 'package:mpos/features/auth/presentation/blocs/auth_bloc.dart';
-import 'package:provider/provider.dart';
+import 'package:mpos/core/utils/app_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,16 +29,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider(create: (_) => AuthRepository()),
-        Provider(create: (context) => LoginUseCase(context.read<AuthRepository>())),
-        ChangeNotifierProvider(create: (context) => AuthBloc(context.read<LoginUseCase>())),
-      ],
+    return AppProviders(
       child: MaterialApp(
         title: 'Flutter Login',
         debugShowCheckedModeBanner: false,
-        onGenerateRoute: AppRouter.generateRoute,//for routing screen
+        onGenerateRoute: AppRouter.generateRoute,
         initialRoute: '/',
       ),
     );

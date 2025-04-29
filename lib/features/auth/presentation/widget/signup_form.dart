@@ -5,12 +5,12 @@ import 'package:mpos/core/widgets/ult_text_field.dart';
 import 'package:mpos/core/widgets/ult_elevated_button.dart';
 import 'package:mpos/core/widgets/ult_outlined_button.dart';
 
-class LoginForm extends StatelessWidget {
+class SignUpForm extends StatelessWidget {
   final AuthBloc authBloc;
   final double fontSizeMultiplier;
   final double padding;
 
-  const LoginForm({
+  const SignUpForm({
     super.key,
     required this.authBloc,
     this.fontSizeMultiplier = 1.0,
@@ -24,7 +24,7 @@ class LoginForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Sign In",
+          "Sign Up",
           style: GoogleFonts.poppins(
             fontSize: 28 * fontSizeMultiplier,
             fontWeight: FontWeight.w600,
@@ -33,7 +33,7 @@ class LoginForm extends StatelessWidget {
         ),
         SizedBox(height: padding / 2),
         Text(
-          "Welcome back to your account",
+          "Create a new account",
           style: GoogleFonts.poppins(
             fontSize: 14 * fontSizeMultiplier,
             color: Colors.grey[600],
@@ -52,10 +52,17 @@ class LoginForm extends StatelessWidget {
           obscureText: true,
           fontSizeMultiplier: fontSizeMultiplier,
         ),
+        SizedBox(height: padding),
+        ULTTextField(
+          controller: authBloc.confirmPasswordController,
+          hintText: 'Confirm Password',
+          obscureText: true,
+          fontSizeMultiplier: fontSizeMultiplier,
+        ),
         SizedBox(height: padding * 1.5),
         ULTElevatedButton(
-          onPressed: () => authBloc.login(context),
-          text: 'Login',
+          onPressed: () => authBloc.signUp(context),
+          text: 'Sign Up',
           fontSizeMultiplier: fontSizeMultiplier,
         ),
         SizedBox(height: padding),
@@ -74,19 +81,6 @@ class LoginForm extends StatelessWidget {
           text: 'Continue with Google',
           iconPath: 'assets/images/google_logo.png',
           fontSizeMultiplier: fontSizeMultiplier,
-        ),
-        SizedBox(height: padding),
-        Center(
-          child: TextButton(
-            onPressed: () => Navigator.pushNamed(context, '/signup'),
-            child: Text(
-              'Don’t have an account? Sign Up',
-              style: GoogleFonts.poppins(
-                fontSize: 14 * fontSizeMultiplier,
-                color: const Color(0xFF00C4B4),
-              ),
-            ),
-          ),
         ),
       ],
     );
