@@ -1,15 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:mpos/core/utils/responsive_utils.dart';
+import 'package:mpos/core/widgets/ult_toaster.dart';
 import 'package:mpos/features/auth/domain/usecases/login_usecase.dart';
+import 'package:mpos/features/auth/domain/usecases/signup_usecase.dart';
+import 'package:mpos/features/dashboard/presentation/widget/text_style.dart';
 
 class AuthBloc with ChangeNotifier {
   final LoginUseCase loginUseCase;
+  final SignUpUseCase signUpUseCase;
 
-  AuthBloc(this.loginUseCase);
+  AuthBloc(this.loginUseCase, this.signUpUseCase);
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
-   void login(BuildContext context) async {
+  void _showToaster(BuildContext context, String message, ) {
+    final config = ResponsiveUtils.getResponsiveConfig(context);
+    final overlay = Overlay.of(context);
+    final overlayEntry = OverlayEntry(
+      builder: (context) => ULTToaster(
+        config: config,
+        gradient: const LinearGradient(
+        colors: [Color.fromARGB(255, 179, 40, 30), Color.fromARGB(255, 221, 103, 95)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+        autoDismissDuration: const Duration(seconds: 3),
+        child: Text(
+          message,
+          style: textStyle(
+            fontSize: 16,
+            config: config,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+
+    overlay.insert(overlayEntry);
+    Future.delayed(const Duration(seconds: 3), () {
+      overlayEntry.remove();
+    });
+  }
+
+  void login(BuildContext context) async {
     try {
       bool success = await loginUseCase.execute(
         usernameController.text,
@@ -17,15 +52,35 @@ class AuthBloc with ChangeNotifier {
       );
 
       if (success) {
-        // Handle success (Navigate, show success message)
-          Navigator.pushReplacementNamed(context, '/dashboard');
+        Navigator.pushReplacementNamed(context, '/dashboard');
       } else {
-        // Handle failure (Show error message)
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Invalid Credentials")));
+        _showToaster(context, "Invalid Credentials");
       }
     } catch (e) {
-      // Handle any exceptions
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("An error occurred: $e")));
+      _showToaster(context, "An error occurred: $e");
+    }
+  }
+
+  void signUp(BuildContext context) async {
+    try {
+      if (passwordController.text != confirmPasswordController.text) {
+        _showToaster(context, "Passwords do not match");
+        return;
+      }
+
+      bool success = await signUpUseCase.execute(
+        usernameController.text,
+        passwordController.text,
+      );
+
+      if (success) {
+        Navigator.pushReplacementNamed(context, '/dashboard');
+      } else {
+        _showToaster(context, "Sign Up failed");
+      }
+    } catch (e) {
+      print(e.toString());
+      _showToaster(context, "$e");
     }
   }
 
@@ -33,15 +88,20 @@ class AuthBloc with ChangeNotifier {
     try {
       bool success = await loginUseCase.executeWithGoogle();
       if (success) {
-        // Handle Google sign-in success
         Navigator.pushReplacementNamed(context, '/dashboard');
       } else {
-        // Handle failure
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Google Sign-In failed")));
+        _showToaster(context, "Google Sign-In failed");
       }
     } catch (e) {
-      // Handle any exceptions
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("An error occurred: $e")));
+      _showToaster(context,  "$e");
     }
+  }
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
   }
 }
