@@ -6,6 +6,8 @@ class ULTTextField extends StatelessWidget {
   final bool obscureText;
   final double fontSizeMultiplier;
   final double padding;
+  final IconData? icon; // New parameter for prefix/suffix icon
+  final bool isPrefixIcon; // Control whether icon is prefix or suffix
 
   const ULTTextField({
     super.key,
@@ -14,6 +16,8 @@ class ULTTextField extends StatelessWidget {
     this.obscureText = false,
     this.fontSizeMultiplier = 1.0,
     this.padding = 16.0,
+    this.icon,
+    this.isPrefixIcon = true, // Default to prefix icon
   });
 
   @override
@@ -28,6 +32,20 @@ class ULTTextField extends StatelessWidget {
           fontSize: 16 * fontSizeMultiplier,
           color: Colors.grey[400],
         ),
+        prefixIcon: icon != null && isPrefixIcon
+            ? Icon(
+                icon,
+                size: 20 * fontSizeMultiplier,
+                color: Colors.grey[400],
+              )
+            : null,
+        suffixIcon: icon != null && !isPrefixIcon
+            ? Icon(
+                icon,
+                size: 20 * fontSizeMultiplier,
+                color: Colors.grey[400],
+              )
+            : null,
         filled: true,
         fillColor: Colors.grey[100],
         contentPadding: EdgeInsets.symmetric(
